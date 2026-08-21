@@ -1,0 +1,43 @@
+## .NET ##
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Visual Studio ##
+.vs/
+*.rsuser
+*.csproj.user
+
+## Build results ##
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+bld/
+
+## NuGet ##
+**/packages/*
+*.nupkg
+**/[Pp]ackages/build/
+
+## User-specific files ##
+*.userprefs
+*.dbmdl
+*.jfm
+
+## OS files ##
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+## Rider ##
+.idea/
+*.sln.iml
+
+## Publish profiles ##
+[Pp]ublish/
