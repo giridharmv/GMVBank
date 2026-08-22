@@ -5,8 +5,7 @@ namespace GMVBank.Helpers
     public class GetUserDetails: IUserData
     {
         #region Singleton Implementation
-
-        private static GetUserDetails _instance;
+        private static GetUserDetails _instance = new GetUserDetails();
         public static GetUserDetails Instance => _instance;
         public GetUserDetails() { }
         #endregion
@@ -117,7 +116,7 @@ namespace GMVBank.Helpers
             try
             {
                 Console.WriteLine("Please Enter AccountType: ");
-                Console.WriteLine(string.Join("\n", OptionHelper.AccTypes.Values));
+                Console.WriteLine(string.Join("\n",OptionHelper.AccTypes.Keys.Select(key => $"{key}. {OptionHelper.AccTypes[key]}")));
                 AccountType = Convert.ToInt32(Console.ReadLine());
                 AccountType = Extension.Instance.EnsureIntegerInRange(AccountType, 0, OptionHelper.AccTypes.Count);
             }

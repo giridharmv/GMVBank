@@ -20,6 +20,15 @@ namespace GMVBank.Helpers
             {"3","Trans" },
             {"4","Other" },
         };
-
+        public readonly static IDictionary<int, string> UserOperationOptions = new Dictionary<int, string>()
+        {
+            {1,"Open New Account" },
+            {2,"Deposit Money" },
+            {3,"Withdraw Money" },
+            {4,"Check Balance" },
+            {5,"Get User Name by Account Number" },
+            {6, "Get All User Account Numbers" },
+            {7,"Exit" }
+        };
     }
 }
