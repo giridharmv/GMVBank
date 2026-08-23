@@ -1,5 +1,6 @@
 using GMVBank.DB;
 using GMVBank.Models;
+using GMVBank.Helpers;
 
 namespace GMVBank.Helpers
 {
@@ -15,7 +16,7 @@ namespace GMVBank.Helpers
                 db.Database.EnsureCreated();
                 db.Users.Add(user);
                 db.SaveChanges();
-                Console.WriteLine($"\n? User '{user.Name}' saved successfully! User ID: {user.Id}");
+                Console.WriteLine($"\n? User '{user.Name}' saved successfully! User ID: {user.CustomerID}");
             }
         }
 
@@ -32,16 +33,17 @@ namespace GMVBank.Helpers
         }
 
         /// <summary>
-        /// Finds a user by account number
+        /// Finds a user by customer ID
         /// </summary>
-        public static User? GetUserByAccountNumber()
+        public static User? GetUserByCustomerID()
         {
-            Console.WriteLine("Please Enter Account Number:\n");
-            string accountNumber = Console.ReadLine() ?? string.Empty;
+            Console.WriteLine("Please Enter Customer ID:\n");
+            int customerid = Convert.ToInt32(Console.ReadLine());
+            Extension.Instance.EnsureIntegerInRange(customerid, 0, int.MaxValue);
             using (Database db = new Database())
             {
                 db.Database.EnsureCreated();
-                return db.Users.FirstOrDefault(u => u.AccountNumber == accountNumber);
+                return db.Users.FirstOrDefault(u => u.CustomerID == customerid);
             }
         }
 
@@ -61,7 +63,7 @@ namespace GMVBank.Helpers
             Console.WriteLine("\n======= All Users =======");
             foreach (var user in users)
             {
-                Console.WriteLine($"\nID: {user.Id}");
+                Console.WriteLine($"\nID: {user.CustomerID}");
                 Console.WriteLine($"Name: {user.Name}");
                 Console.WriteLine($"Account Number: {user.AccountNumber}");
                 Console.WriteLine($"Created: {user.CreatedAt}");

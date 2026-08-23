@@ -41,7 +41,7 @@ namespace GMVBank.DB
             // Configure User entity
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasKey(e => e.Id);
+                entity.HasKey(e => e.CustomerID);
                 entity.Property(e => e.Name).IsRequired();
                 entity.Property(e => e.AccountNumber).IsRequired();
                 entity.HasIndex(e => e.AccountNumber).IsUnique();

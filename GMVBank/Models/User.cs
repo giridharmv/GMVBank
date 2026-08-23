@@ -5,7 +5,7 @@ namespace GMVBank.Models
     public class User
     {
         [Key]
-        public int Id { get; set; }
+        public int CustomerID { get; set; }
 
         [Required]
         public string Name { get; set; }
