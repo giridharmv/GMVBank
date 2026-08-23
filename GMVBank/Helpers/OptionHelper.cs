@@ -26,8 +26,8 @@ namespace GMVBank.Helpers
             {2,"Deposit Money" },
             {3,"Withdraw Money" },
             {4,"Check Balance" },
-            {5,"Get User Name by Account Number" },
-            {6, "Get All User Account Numbers" },
+            {5,"Get User details from CustomerID" },
+            {6, "Get All User CustomerID's" },
             {7,"Exit" }
         };
     }

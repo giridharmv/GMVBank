@@ -1,4 +1,5 @@
 ﻿using GMVBank.Interface;
+using GMVBank.Models;
 
 namespace GMVBank.Helpers
 {
@@ -12,6 +13,7 @@ namespace GMVBank.Helpers
 
         #region Private Fields
 
+        int _customerid = 0;
         int _userAccType;
         string _userGender = "male";
         string _name = "Giri";
@@ -20,6 +22,11 @@ namespace GMVBank.Helpers
         {
             get => _userAccType;
             set => _userAccType = value;
+        }
+        public int CustomerID
+        {
+            get => _customerid;
+            set => _customerid = value;
         }
         public string Gender
         {
@@ -127,7 +134,78 @@ namespace GMVBank.Helpers
             }
             Console.WriteLine($"You have selected {OptionHelper.AccTypes[AccountType]}");
         }
-
         #endregion
+
+        #region Generate CustomerID
+
+        /// <summary>
+        /// This method generates a random customer ID between 10000 and 99999.
+        /// </summary>
+        /// <returns></returns>
+        public int GenerateCustomerId()
+        {
+            Random rng = new Random();
+            return rng.Next(10000, 99999); // Generate a random 5-digit number
+        }
+        #endregion
+        /// <summary>
+        /// This method displays the user operation options and takes the user's choice as input.
+        /// </summary>
+        public static void UserOperationOptions()
+        {
+            Console.WriteLine("\n");
+            Console.WriteLine("Please select an option:");
+            Console.WriteLine(string.Join("\n", OptionHelper.UserOperationOptions.Keys.Select(key => $"{key}. {OptionHelper.UserOperationOptions[key]}")));
+            int choice = Convert.ToInt32(Console.ReadLine());
+            if (!(choice <= OptionHelper.UserOperationOptions.Count))
+                throw new Exception("Invalid choice. Please select a valid option.");
+            GetUserChoice(choice);
+            UserOperationOptions(); // Call UserOperationOptions method again to display the options after performing the action
+        }
+
+        /// <summary>
+        /// This method takes the user's choice as input and performs the corresponding action based on the choice.
+        /// </summary>
+        /// <param name="choice"></param>
+        private static void GetUserChoice(int choice)
+        {
+            switch (choice)
+            {
+                case 1:
+                    CreateNewAccountHelper NewAccount = new();
+                    NewAccount.CreateNewAccount();
+                    break;
+                case 2:
+                    Console.WriteLine("Deposit Money");
+                    break;
+                case 3:
+                    Console.WriteLine("Withdraw Money");
+                    break;
+                case 4:
+                    Console.WriteLine("Check Balance");
+                    break;
+                case 5:
+                    User? userbyAcc = DatabaseHelper.GetUserByCustomerID();
+                    if (userbyAcc != null)
+                    {
+                        Console.WriteLine($"User Name: {userbyAcc.Name}");
+                        Console.WriteLine($"Account Number: {userbyAcc.AccountNumber}");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("User not found.");
+                        break;
+                    }
+                case 6:
+                    Console.WriteLine("All Users Account Numbers....");
+                    DatabaseHelper.DisplayAllUsers();
+                    break;
+                case 7:
+                    Console.WriteLine("Exiting the application...");
+                    Environment.Exit(0);
+                    break;
+            }
+        }
     }
 }
