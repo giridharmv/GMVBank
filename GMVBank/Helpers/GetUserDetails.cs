@@ -14,11 +14,11 @@ namespace GMVBank.Helpers
         #region Private Fields
 
         int _customerid = 0;
-        int _userAccType;
+        string _userAccType = "Current Account";
         string _userGender = "male";
         string _name = "Giri";
         string _accountNumber = "912837483";
-        public int AccountType
+        public string AccountType
         {
             get => _userAccType;
             set => _userAccType = value;
@@ -124,15 +124,16 @@ namespace GMVBank.Helpers
             {
                 Console.WriteLine("Please Enter AccountType: ");
                 Console.WriteLine(string.Join("\n",OptionHelper.AccTypes.Keys.Select(key => $"{key}. {OptionHelper.AccTypes[key]}")));
-                AccountType = Convert.ToInt32(Console.ReadLine());
-                AccountType = Extension.Instance.EnsureIntegerInRange(AccountType, 0, OptionHelper.AccTypes.Count);
+                string selectedAccountType = Console.ReadLine();
+                AccountType = OptionHelper.AccTypes.TryGetValue(selectedAccountType, out string accountType) ? accountType : "Current Account";
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex}, Please enter valid input.");
                 GetUserAccountType();
             }
-            Console.WriteLine($"You have selected {OptionHelper.AccTypes[AccountType]}");
+            Console.WriteLine($"You have selected {AccountType}");
         }
         #endregion
 

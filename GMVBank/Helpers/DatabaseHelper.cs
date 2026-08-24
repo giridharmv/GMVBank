@@ -48,6 +48,7 @@ namespace GMVBank.Helpers
                 {
                     Console.WriteLine($"User Name: {userbyAcc.Name}");
                     Console.WriteLine($"Account Number: {userbyAcc.AccountNumber}");
+                    Console.WriteLine($"Account Type: {userbyAcc.AccountType}");
                 }
                 else
                     Console.WriteLine("User not found.");
@@ -73,6 +74,7 @@ namespace GMVBank.Helpers
                 Console.WriteLine($"\nID: {user.CustomerID}");
                 Console.WriteLine($"Name: {user.Name}");
                 Console.WriteLine($"Account Number: {user.AccountNumber}");
+                Console.WriteLine($"Account Type: {user.AccountType}");
                 Console.WriteLine($"Created: {user.CreatedAt}");
                 Console.WriteLine("------------------------");
             }
