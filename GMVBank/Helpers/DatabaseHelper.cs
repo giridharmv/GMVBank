@@ -35,7 +35,7 @@ namespace GMVBank.Helpers
         /// <summary>
         /// Finds a user by customer ID
         /// </summary>
-        public static User? GetUserByCustomerID()
+        public static void GetUserByCustomerID()
         {
             Console.WriteLine("Please Enter Customer ID:\n");
             int customerid = Convert.ToInt32(Console.ReadLine());
@@ -43,7 +43,14 @@ namespace GMVBank.Helpers
             using (Database db = new Database())
             {
                 db.Database.EnsureCreated();
-                return db.Users.FirstOrDefault(u => u.CustomerID == customerid);
+                var userbyAcc = db.Users.FirstOrDefault(u => u.CustomerID == customerid);
+                if (userbyAcc != null)
+                {
+                    Console.WriteLine($"User Name: {userbyAcc.Name}");
+                    Console.WriteLine($"Account Number: {userbyAcc.AccountNumber}");
+                }
+                else
+                    Console.WriteLine("User not found.");
             }
         }
 

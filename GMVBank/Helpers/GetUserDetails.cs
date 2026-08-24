@@ -154,58 +154,32 @@ namespace GMVBank.Helpers
         public static void UserOperationOptions()
         {
             Console.WriteLine("\n");
-            Console.WriteLine("Please select an option:");
+            Console.WriteLine("--------Menu--------");
             Console.WriteLine(string.Join("\n", OptionHelper.UserOperationOptions.Keys.Select(key => $"{key}. {OptionHelper.UserOperationOptions[key]}")));
+            Console.Write("\nPlease select an option: ");
             int choice = Convert.ToInt32(Console.ReadLine());
             if (!(choice <= OptionHelper.UserOperationOptions.Count))
                 throw new Exception("Invalid choice. Please select a valid option.");
-            GetUserChoice(choice);
+
+            menuActions.TryGetValue(choice, out Action action);
+            action();
+
             UserOperationOptions(); // Call UserOperationOptions method again to display the options after performing the action
         }
-
         /// <summary>
-        /// This method takes the user's choice as input and performs the corresponding action based on the choice.
+        /// This dictionary maps user operation options to their corresponding actions. 
+        /// Each key represents a user operation option, and the value is an 
+        /// Action delegate that defines the action to be performed when that option is selected.
         /// </summary>
-        /// <param name="choice"></param>
-        private static void GetUserChoice(int choice)
+        static Dictionary<int, Action> menuActions = new()
         {
-            switch (choice)
-            {
-                case 1:
-                    CreateNewAccountHelper NewAccount = new();
-                    NewAccount.CreateNewAccount();
-                    break;
-                case 2:
-                    Console.WriteLine("Deposit Money");
-                    break;
-                case 3:
-                    Console.WriteLine("Withdraw Money");
-                    break;
-                case 4:
-                    Console.WriteLine("Check Balance");
-                    break;
-                case 5:
-                    User? userbyAcc = DatabaseHelper.GetUserByCustomerID();
-                    if (userbyAcc != null)
-                    {
-                        Console.WriteLine($"User Name: {userbyAcc.Name}");
-                        Console.WriteLine($"Account Number: {userbyAcc.AccountNumber}");
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("User not found.");
-                        break;
-                    }
-                case 6:
-                    Console.WriteLine("All Users Account Numbers....");
-                    DatabaseHelper.DisplayAllUsers();
-                    break;
-                case 7:
-                    Console.WriteLine("Exiting the application...");
-                    Environment.Exit(0);
-                    break;
-            }
-        }
+            { 1, () => new CreateNewAccountHelper().CreateNewAccount() },
+            { 2, () => Console.WriteLine("Deposit Money") },
+            { 3, () => Console.WriteLine("Withdraw Money") },
+            { 4, () => Console.WriteLine("Check Balance") },
+            { 5, () => DatabaseHelper.GetUserByCustomerID() },
+            { 6, () => DatabaseHelper.DisplayAllUsers() },
+            { 7, () => Environment.Exit(0) }
+        };
     }
 }
