@@ -13,7 +13,8 @@ namespace GMVBank.Models
         [Required]
         public string? AccountNumber { get; set; }
 
-        public int AccountType { get; set; }
+        [Required]
+        public string AccountType { get; set; } = "Current Account";
 
         public string? Gender { get; set; }
 

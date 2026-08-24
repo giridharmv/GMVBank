@@ -26,6 +26,10 @@ namespace GMVBank.Helpers
                     Gender = GetUserDetails.Instance.Gender,
                     CustomerID = GetUserDetails.Instance.CustomerID,
                 };
+                if (string.IsNullOrWhiteSpace(user.AccountType))
+                {
+                    throw new InvalidOperationException("Account type was not captured.");
+                }
                 // Add user to database
                 db.Users.Add(user);
 

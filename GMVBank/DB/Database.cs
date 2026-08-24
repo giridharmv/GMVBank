@@ -45,7 +45,7 @@ namespace GMVBank.DB
                 entity.Property(e => e.Name).IsRequired();
                 entity.Property(e => e.AccountNumber).IsRequired();
                 entity.HasIndex(e => e.AccountNumber).IsUnique();
-                entity.Property(e => e.AccountType).IsRequired();
+                entity.Property(e => e.AccountType).HasColumnType("TEXT").IsRequired();
                 entity.Property(e => e.Gender).IsRequired();
                 entity.Property(e => e.CreatedAt).IsRequired();
             });

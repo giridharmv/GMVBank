@@ -8,10 +8,10 @@ namespace GMVBank.Helpers
 {
     public class OptionHelper
     {
-        public readonly static IDictionary<int, string> AccTypes = new Dictionary<int, string>()
+        public readonly static IDictionary<string, string> AccTypes = new Dictionary<string, string>()
         {
-            {1,"Current Account" },
-            {2,"Saving Account" }
+            {"1","Current Account" },
+            {"2","Saving Account" }
         };
         public readonly static IDictionary<string, string> GenderType = new Dictionary<string, string>()
         {
