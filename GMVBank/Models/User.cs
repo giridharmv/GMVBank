@@ -19,5 +19,7 @@ namespace GMVBank.Models
         public string? Gender { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        public decimal Balance { get; set; } = 0;
     }
 }
