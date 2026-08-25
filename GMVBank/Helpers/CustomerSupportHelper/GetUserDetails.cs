@@ -1,7 +1,7 @@
 ﻿using GMVBank.Interface;
 using GMVBank.Models;
 
-namespace GMVBank.Helpers
+namespace GMVBank.Helpers.ActionHelper
 {
     public class GetUserDetails: IUserData
     {
@@ -172,11 +172,11 @@ namespace GMVBank.Helpers
         /// Each key represents a user operation option, and the value is an 
         /// Action delegate that defines the action to be performed when that option is selected.
         /// </summary>
-        static Dictionary<int, Action> menuActions = new()
+        public static Dictionary<int, Action> menuActions = new()
         {
             { 1, () => new CreateNewAccountHelper().CreateNewAccount() },
-            { 2, () => Console.WriteLine("Deposit Money") },
-            { 3, () => Console.WriteLine("Withdraw Money") },
+            { 2, () => new MoneyHelper().UserDepositMoney() },
+            { 3, () => new MoneyHelper().UserWithdrawMoney() },
             { 4, () => Console.WriteLine("Check Balance") },
             { 5, () => DatabaseHelper.GetUserByCustomerID() },
             { 6, () => DatabaseHelper.DisplayAllUsers() },

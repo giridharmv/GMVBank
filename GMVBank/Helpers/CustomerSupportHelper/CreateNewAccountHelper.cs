@@ -2,7 +2,7 @@
 using GMVBank.Models;
 using System.Security.Cryptography;
 
-namespace GMVBank.Helpers
+namespace GMVBank.Helpers.ActionHelper
 {
     public class CreateNewAccountHelper
     {

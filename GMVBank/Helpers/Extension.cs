@@ -31,10 +31,12 @@ namespace GMVBank.Helpers
         /// <exception cref="Exception"></exception>
         public void EnsureStringNotEmpty(string input)
         {
-            if (!(input.Equals(null) || input.Equals(" ")))
-                return;
-                
-            throw new Exception($"Input {input} is null. Please enter a valid value.");
+
+            foreach (var str in input.Split(';'))
+            {
+                if (string.IsNullOrWhiteSpace(str))
+                    throw new Exception($"Input {input} is null. Please enter a valid value.");
+            }
         }
     }
 }
