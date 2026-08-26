@@ -177,7 +177,7 @@ namespace GMVBank.Helpers.ActionHelper
             { 1, () => new CreateNewAccountHelper().CreateNewAccount() },
             { 2, () => new MoneyHelper().UserDepositMoney() },
             { 3, () => new MoneyHelper().UserWithdrawMoney() },
-            { 4, () => Console.WriteLine("Check Balance") },
+            { 4, () => new MoneyHelper().UserBalance() },
             { 5, () => DatabaseHelper.GetUserByCustomerID() },
             { 6, () => DatabaseHelper.DisplayAllUsers() },
             { 7, () => Environment.Exit(0) }

@@ -32,7 +32,16 @@ namespace GMVBank.Helpers.ActionHelper
             Extension.Instance.EnsureStringNotEmpty($"{customerid};{amount}");
             WithdrawMoney(amount, customerid);
         }
-
+        /// <summary>
+        /// Gets the current balance of a user's account based on their CustomerID.
+        /// </summary>
+        /// <returns></returns>
+        public void UserBalance()
+        {
+            Console.WriteLine("Please Provide the CustomerID: ");
+            int customerid = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine($"The current balance of given CustomerID '{customerid}': {GetUserBalance(customerid)}");
+        }
         /// <summary>
         /// Deposits money into a user's account based on their CustomerID.
         /// </summary>
@@ -60,6 +69,7 @@ namespace GMVBank.Helpers.ActionHelper
             }
             return amount; 
         }
+        
         /// <summary>
         /// Withdraw's money from a user's account based on their CustomerID.
         /// </summary>
@@ -90,6 +100,25 @@ namespace GMVBank.Helpers.ActionHelper
                 db.SaveChanges();
             }
             return amount; 
+        }
+        /// <summary>
+        /// Gets the current balance of a user's account based on their CustomerID.
+        /// </summary>
+        /// <param name="CustomerID"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static decimal GetUserBalance(int CustomerID)
+        {
+            using (Database db = new())
+            {
+                // Ensure database is created
+                db.Database.EnsureCreated();
+                // Find the user by CustomerID
+                var user = db.Users.Find(CustomerID);
+                if (user == null)
+                    throw new Exception($"User with CustomerID {CustomerID} not found.");
+                return user.Balance;
+            }
         }
     }
 }
