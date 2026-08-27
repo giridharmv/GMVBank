@@ -46,7 +46,7 @@ namespace GMVBank.Helpers.ActionHelper
         public static void UserDetails()
         {
             GetUserDetails.Instance.GetUserName();
-            GetUserDetails.Instance.GetUserAccountNumber();
+            GetUserDetails.Instance.AccountNumber = GetUserDetails.Instance.GetUserAccountNumber();
             GetUserDetails.Instance.GetUserAccountType();
             GetUserDetails.Instance.GetUserGender();
             GetUserDetails.Instance.CustomerID = GetUserDetails.Instance.GenerateCustomerId();

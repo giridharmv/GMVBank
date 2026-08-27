@@ -51,19 +51,10 @@ namespace GMVBank.Helpers.ActionHelper
         /// Gets the account number of the user. It prompts the user to enter their account number and ensures that 
         /// the input is not empty. If the input is invalid, it catches the exception and prompts the user to enter a valid input again.
         /// </summary>
-        public void GetUserAccountNumber()
+        public string GetUserAccountNumber()
         {
-            try
-            {
-                Console.WriteLine("Please Enter AccountNumber:\n");
-                AccountNumber = Console.ReadLine();
-                Extension.Instance.EnsureStringNotEmpty(AccountNumber);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex}, Please enter valid input.");
-                GetUserAccountNumber();
-            }
+            Random rng = new Random();
+            return rng.Next(1000000, 9999999).ToString();
         }
         #endregion
 
@@ -76,7 +67,7 @@ namespace GMVBank.Helpers.ActionHelper
         {
             try
             {
-                Console.WriteLine("Please enter Name as per Aadhaar:\n");
+                Console.WriteLine("Please enter Name as per Aadhaar: ");
                 Name = Console.ReadLine();
                 Extension.Instance.EnsureStringNotEmpty(Name);
             }
@@ -96,8 +87,8 @@ namespace GMVBank.Helpers.ActionHelper
         {
             try
             {
-                Console.WriteLine("Enter Gender:\n");
                 Console.WriteLine(string.Join("\n", OptionHelper.GenderType.Values));
+                Console.WriteLine("Enter Gender: ");
                 Gender = Console.ReadLine();
                 Extension.Instance.EnsureStringNotEmpty(Gender);
                 OptionHelper.GenderType.TryGetValue(Gender, out string gender);
@@ -122,8 +113,8 @@ namespace GMVBank.Helpers.ActionHelper
         {
             try
             {
-                Console.WriteLine("Please Enter AccountType: ");
                 Console.WriteLine(string.Join("\n",OptionHelper.AccTypes.Keys.Select(key => $"{key}. {OptionHelper.AccTypes[key]}")));
+                Console.WriteLine("Please Enter AccountType: ");
                 string selectedAccountType = Console.ReadLine();
                 AccountType = OptionHelper.AccTypes.TryGetValue(selectedAccountType, out string accountType) ? accountType : "Current Account";
 
